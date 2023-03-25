@@ -1,4 +1,4 @@
-### Message Encrypting App
+# Message Encrypting App
 
 ## Setup
 
