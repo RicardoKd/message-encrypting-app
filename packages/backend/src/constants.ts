@@ -45,10 +45,10 @@ export const DB = Object.freeze({
   SELECT: Object.freeze({
     ALL_MESSAGES: (
       ownerId: number
-    ) => `SELECT _id, "text", "ownerId", "creationTime", 'xor' AS encryptionType 
+    ) => `SELECT _id, "text", "ownerId", "creationTime", 'xor' AS "encryptionType" 
     FROM xor_message WHERE "ownerId" = ${ownerId}
    UNION
-   SELECT _id, "text", "ownerId", "creationTime", 'caesar' AS encryptionType 
+   SELECT _id, "text", "ownerId", "creationTime", 'caesar' AS "encryptionType" 
     FROM caesar_message WHERE "ownerId" = ${ownerId}
    ORDER BY "creationTime"
   `,

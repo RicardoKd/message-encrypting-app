@@ -19,7 +19,6 @@ const { XOR_KEY } = process.env;
 
 export default class MessageService {
   async getAccountMessages({ account }: IAuthMiddlewareBody): Promise<IMessage[]> {
-    // FIXME: check if encryptionType is lowercased by postgres
     const queryResult = await dbConnection.query<IMessage>(DB.SELECT.ALL_MESSAGES(account._id));
 
     return queryResult.rows;
