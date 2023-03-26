@@ -1,5 +1,6 @@
 import { Modal } from '@mui/material';
 import styled from 'styled-components';
+import Select from '@mui/material/Select';
 
 import { COLORS, SPACES } from '../../../theme';
 
@@ -9,12 +10,16 @@ export const MessageModalWrapperStyled = styled(Modal)`
   justify-content: center;
 `;
 
+export const SelectStyled = styled(Select)``;
+
 export const CreateMessageFormStyled = styled('div')`
   display: flex;
   flex-direction: column;
   margin-bottom: ${SPACES.l};
+  background-color: ${COLORS.white};
+  padding: ${SPACES.xxl};
 
-  div {
+  & > div {
     margin-bottom: ${SPACES.m};
   }
 `;
@@ -24,8 +29,10 @@ export const FormStyled = styled('form')`
   height: 100%;
   display: flex;
   flex-direction: column;
-  padding: ${SPACES.xxl};
-  background-color: ${COLORS.white};
+
+  div {
+    margin-bottom: ${SPACES.m};
+  }
 `;
 
 export const FormButtonsContainerStyled = styled('div')`

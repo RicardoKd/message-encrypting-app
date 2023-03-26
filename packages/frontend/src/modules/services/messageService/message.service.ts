@@ -15,7 +15,7 @@ class MessageService extends HttpService {
   async createXor(data: IPostXorMessageBody) {
     const message = await this.post<IMessage>({
       data,
-      url: this.serviceEndpoint
+      url: `${this.serviceEndpoint}/${APP_KEYS.BACKEND_KEYS.CREATE_XOR}`
     });
 
     return message;
@@ -24,21 +24,17 @@ class MessageService extends HttpService {
   async createCaesar(data: IPostCaesarMessageBody) {
     const message = await this.post<IMessage>({
       data,
-      url: this.serviceEndpoint
+      url: `${this.serviceEndpoint}/${APP_KEYS.BACKEND_KEYS.CREATE_CAESAR}`
     });
 
     return message;
   }
 
   async decrypt(data: IDecryptMessageBody) {
-    console.log('data :>> ', data);
     const decryptedMessage = await this.post<{ message: string }>({
       data,
       url: `${this.serviceEndpoint}/${APP_KEYS.BACKEND_KEYS.DECRYPT}`
     });
-
-    console.log('decryptedMessage :>> ', decryptedMessage);
-
     return decryptedMessage.message;
   }
 }
