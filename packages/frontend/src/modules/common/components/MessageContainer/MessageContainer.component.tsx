@@ -1,16 +1,20 @@
 import React from 'react';
 import { useQuery } from 'react-query';
 
-import { AppLoader } from '../../../UI';
 import { MessageItem } from '../MessageItem';
 import { messageService } from '../../../services';
+import { AppLoader } from '../../../UI';
 import { MessageModalWrapper } from '../CreateModal';
 import { IMessage, IModal, ModalState } from '../../types';
 import { APP_KEYS, MODAL_INITIAL_STATE } from '../../consts';
-import { MessageContainerStyled, ListViewStyled } from './MessageContainer.styled';
+import { MessageList, MessageContainerStyled } from './MessageContainer.styled';
 
 export const MessageContainer: React.FC = () => {
-  const { data: messages, isLoading: messagesAreLoading } = useQuery<IMessage[]>({
+  const {
+    data: messages,
+    isError: messagesError,
+    isLoading: messagesAreLoading
+  } = useQuery<IMessage[]>({
     queryKey: [APP_KEYS.QUERY_KEYS.MESSAGE],
     keepPreviousData: true,
     queryFn: () => messageService.getMessages()
@@ -23,14 +27,14 @@ export const MessageContainer: React.FC = () => {
 
   return (
     <MessageContainerStyled>
-      {messagesAreLoading ? (
+      {messagesAreLoading || messagesError ? (
         <AppLoader />
       ) : (
-        <ListViewStyled>
+        <MessageList>
           {messages!.map((message, key) => (
             <MessageItem key={key} message={message} />
           ))}
-        </ListViewStyled>
+        </MessageList>
       )}
       {modalIsSuccess && modalState.STATE !== ModalState.IDLE && <MessageModalWrapper />}
     </MessageContainerStyled>

@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { ModalState, IModal } from '../types';
 
 export * as APP_KEYS from './app-keys.const';
@@ -34,3 +35,8 @@ export enum EncryptionTypesEnum {
   XOR = 'xor',
   CAESAR = 'caesar'
 }
+
+export const CAESAR_RESTRICTION = Object.freeze({
+  MAX: 26,
+  MIN: 1
+});

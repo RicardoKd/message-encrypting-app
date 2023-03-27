@@ -7,7 +7,7 @@ export const MessageContainerStyled = styled('div')`
   max-width: ${ADAPTIVE.max};
 `;
 
-export const ListViewStyled = styled('div')`
+export const MessageList = styled('div')`
   display: flex;
   flex-direction: column;
   margin-left: ${SPACES.m};

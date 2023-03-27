@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
 import { useFormik } from 'formik';
-import TextField from '@mui/material/TextField';
-import { useMutation, useQueryClient } from 'react-query';
+import React, { useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
+import { useMutation, useQueryClient } from 'react-query';
 
 import { MUI } from '../../../theme';
 import { IModal } from '../../types';
@@ -10,7 +11,12 @@ import { AppButton } from '../../../UI';
 import FormikXorForm from './FormikXorForm';
 import { messageService } from '../../../services';
 import { XorItems, CaesarItems } from './FormTodoItems';
-import { APP_KEYS, EncryptionTypesEnum, MODAL_INITIAL_STATE } from '../../consts';
+import {
+  APP_KEYS,
+  CAESAR_RESTRICTION,
+  EncryptionTypesEnum,
+  MODAL_INITIAL_STATE
+} from '../../consts';
 import { postXorValidationSchema, postCaesarValidationSchema } from './validationSchema';
 import {
   FormStyled,
@@ -60,12 +66,10 @@ export const MessageModalWrapper: React.FC = () => {
   return (
     <MessageModalWrapperStyled open>
       <CreateMessageFormStyled>
-        <p>Cipher type</p>
+        <Typography variant="body1">Cipher</Typography>
         <SelectStyled
-          labelId="demo-select-small"
           id="demo-select-small"
           value={cipher}
-          label="Cipher"
           size="small"
           // FIXME: refactor on change to remove `as` keyword
           onChange={(e) => handleCipherChange(e.target.value as EncryptionTypesEnum)}
@@ -77,11 +81,13 @@ export const MessageModalWrapper: React.FC = () => {
         {EncryptionTypesEnum.XOR === cipher && (
           <FormStyled onSubmit={formikXor.handleSubmit}>
             <TextField
+              multiline
+              rows={5}
               size={MUI.size}
               variant={MUI.variant}
               id={XorItems.MESSAGE_TEXT}
               name={XorItems.MESSAGE_TEXT}
-              label={XorItems.MESSAGE_TEXT}
+              label="message"
               value={formikXor.values[XorItems.MESSAGE_TEXT]}
               error={
                 formikXor.touched[XorItems.MESSAGE_TEXT] &&
@@ -100,11 +106,13 @@ export const MessageModalWrapper: React.FC = () => {
         {EncryptionTypesEnum.CAESAR === cipher && (
           <FormStyled onSubmit={formikCaesar.handleSubmit}>
             <TextField
+              multiline
+              rows={5}
               size={MUI.size}
               variant={MUI.variant}
               id={CaesarItems.MESSAGE_TEXT}
               name={CaesarItems.MESSAGE_TEXT}
-              label={CaesarItems.MESSAGE_TEXT}
+              label="message"
               value={formikCaesar.values[CaesarItems.MESSAGE_TEXT]}
               error={
                 formikCaesar.touched[CaesarItems.MESSAGE_TEXT] &&
@@ -113,7 +121,14 @@ export const MessageModalWrapper: React.FC = () => {
               onChange={formikCaesar.handleChange}
             />
 
+            {(formikCaesar.values[CaesarItems.SHIFT] < CAESAR_RESTRICTION.MIN ||
+              formikCaesar.values[CaesarItems.SHIFT] >= CAESAR_RESTRICTION.MAX) && (
+              <Typography variant="body1">
+                The shift must be greater than 0 and less than 26
+              </Typography>
+            )}
             <TextField
+              type="number"
               size={MUI.size}
               variant={MUI.variant}
               id={CaesarItems.SHIFT}

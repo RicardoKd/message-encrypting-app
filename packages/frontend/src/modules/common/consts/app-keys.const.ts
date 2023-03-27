@@ -6,7 +6,8 @@ export const STORAGE_KEYS = {
 // React-query keys
 export const QUERY_KEYS = Object.freeze({
   MODAL: 'modal',
-  MESSAGE: 'message'
+  MESSAGE: 'message',
+  AUTH_MODAL: 'authModal'
 });
 
 // Backend Routes

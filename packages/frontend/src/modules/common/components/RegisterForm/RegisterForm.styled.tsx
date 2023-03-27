@@ -20,11 +20,11 @@ export const FormButtons = styled('div')`
 `;
 
 export const ModalInnerContainer = styled('div')`
-  position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   width: 400px;
-  background-color: ${COLORS.lightgrey};
+  position: absolute;
   padding: ${SPACES.xxl};
+  transform: translate(-50%, -50%);
+  background-color: ${COLORS.lightgrey};
 `;

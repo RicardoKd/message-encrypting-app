@@ -40,7 +40,9 @@ export const LoginForm: React.FC = () => {
   return (
     <LoginFormStyled onSubmit={formik.handleSubmit}>
       <div>
-        <Typography variant="body1">Email</Typography>
+        <Typography variant="body1" textTransform="capitalize">
+          {LoginFormItems.NAME}
+        </Typography>
         <TextField
           fullWidth
           type="text"
@@ -55,7 +57,9 @@ export const LoginForm: React.FC = () => {
       </div>
 
       <div>
-        <Typography variant="body1">Password</Typography>
+        <Typography variant="body1" textTransform="capitalize">
+          {LoginFormItems.PASSWORD}
+        </Typography>
         <TextField
           fullWidth
           type={LoginFormItems.PASSWORD}

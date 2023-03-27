@@ -10,14 +10,17 @@ export const MessageModalWrapperStyled = styled(Modal)`
   justify-content: center;
 `;
 
-export const SelectStyled = styled(Select)``;
+export const SelectStyled = styled(Select)`
+  max-width: 200px;
+`;
 
 export const CreateMessageFormStyled = styled('div')`
+  width: 500px;
   display: flex;
   flex-direction: column;
+  padding: ${SPACES.xl};
   margin-bottom: ${SPACES.l};
   background-color: ${COLORS.white};
-  padding: ${SPACES.xxl};
 
   & > div {
     margin-bottom: ${SPACES.m};

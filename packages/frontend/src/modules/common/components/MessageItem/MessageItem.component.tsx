@@ -13,6 +13,7 @@ interface MessageItemProps {
 
 export const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
   const [decryptedMessage, setDecryptedMessage] = useState<string | null>(null);
+  const [isDecrypted, setIsDecrypted] = useState<boolean>(false);
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   const { text, _id, encryptionType } = message;
@@ -22,12 +23,13 @@ export const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
   });
   const handleDecrypt = () => {
     createMutation.mutate({ messageId: _id, encryptionType });
+    setIsDecrypted(true);
   };
 
   return (
     <ItemStyled>
       <Typography variant="body2">{decryptedMessage === null ? text : decryptedMessage}</Typography>
-      <AppButton text="Decrypt" onClick={() => handleDecrypt()} />
+      <AppButton disabled={isDecrypted} text="Decrypt" onClick={() => handleDecrypt()} />
     </ItemStyled>
   );
 };

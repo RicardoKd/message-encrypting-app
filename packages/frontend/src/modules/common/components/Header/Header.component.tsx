@@ -2,6 +2,7 @@ import React from 'react';
 import { useQueryClient } from 'react-query';
 
 import { SPACES } from '../../../theme';
+import { logOut } from '../../../utils';
 import { APP_KEYS } from '../../consts';
 import { StyledHeader } from './Header.styled';
 import { IModal, ModalState } from '../../types';
@@ -17,12 +18,10 @@ export const Header: React.FC = () => {
     });
   };
 
-  const handleLogOut = () => localStorage.removeItem(APP_KEYS.STORAGE_KEYS.TOKEN);
-
   return (
     <StyledHeader>
       <RouterLink to={APP_KEYS.ROUTER_KEYS.START}>
-        <AppButton text="Log out" onClick={() => handleLogOut()} style={{ margin: SPACES.m }} />
+        <AppButton text="Log out" onClick={logOut} style={{ margin: SPACES.m }} />
       </RouterLink>
 
       <AppButton text="Create" onClick={() => handleCreate()} style={{ margin: SPACES.m }} />
