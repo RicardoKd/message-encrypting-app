@@ -37,11 +37,11 @@ Client runs on port: `3000`
 
 ### Server routes
 
-| Route | Method | Body | Auth |
-| ------ | ------ | ------ | ------ |
-| `/api/account/login` | `POST` | `{name: string, password: string}` | `false` |
-| `/api/account/register` | `POST` | `{name: string, password: string}` | `false` |
-| `/api/message` | `GET` | No | `true` |
-| `/api/message/xor` | `POST` | `{messageText: string}` | `true` |
-| `/api/message/caesar` | `POST` | `{messageText: string, shift: number}` | `true` |
-| `/api/message/decrypt` | `POST` | `{messageId: number, encryptionType: string}` | `true` |
+| Route | Method | Body | Auth | Description |
+| ------ | ------ | ------ | ------ | ------ |
+| `/api/account/login` | `POST` | `{name: string, password: string}` | `false` | Loggs in the user |
+| `/api/account/register` | `POST` | `{name: string, password: string}` | `false` | Registers the user |
+| `/api/message` | `GET` | No | `true` | Gets all messages that belong to the logged in user |
+| `/api/message/xor` | `POST` | `{messageText: string}` | `true` | Creates a new message ciphered with Xor |
+| `/api/message/caesar` | `POST` | `{messageText: string, shift: number}` | `true` | Creates a new message ciphered with Caesar |
+| `/api/message/decrypt` | `POST` | `{messageId: number, encryptionType: string}` | `true` | Decrypts a message |
